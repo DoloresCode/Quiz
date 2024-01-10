@@ -53,9 +53,9 @@ public class Question implements Serializable {
 	// Type of question. Example: trivia, poll, checkbox, matrix
 	private String type;
 
-	// There is One-to-Many relationship between Question and MatrixOption. A question can have many matrix options.
+	// There is One-to-Many relationship between Question and MatrixQuestion. A question can have many matrix options.
 	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MatrixOption> matrixOptions = new ArrayList<>();
+    private List<MatrixQuestion> matrixQuestions = new ArrayList<>();
 
 	// There is One-to-Many relationship between Question and QuestionAnswer. A question can have many answers.
 	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
@@ -115,30 +115,30 @@ public class Question implements Serializable {
 		return answers;
 	}
 
-	public List<MatrixOption> getMatrixOptions() {
+	public List<MatrixQuestion> getMatrixQuestions() {
         if ("matrix".equals(this.type)) {
-            return matrixOptions;
+            return matrixQuestions;
         } else {
             return null;
         }
     }
 
-    public void setMatrixOptions(List<MatrixOption> matrixOptions) {
+    public void setMatrixQuestions(List<MatrixQuestion> matrixQuestions) {
         if ("matrix".equals(this.type)) {
-            this.matrixOptions = matrixOptions;
+            this.matrixQuestions = matrixQuestions;
         }
     }
 
-    public void addMatrixOption(MatrixOption matrixOption) {
-        if ("matrix".equals(this.type) && matrixOptions != null) {
-            matrixOptions.add(matrixOption);
-            matrixOption.setQuestion(this);
+    public void addMatrixQuestion(MatrixQuestion matrixQuestion) {
+        if ("matrix".equals(this.type) && matrixQuestions != null) {
+            matrixQuestions.add(matrixQuestion);
+            matrixQuestion.setQuestion(this);
         }
     }
 
-    public void removeMatrixOption(MatrixOption matrixOption) {
-        if (matrixOptions != null && matrixOptions.remove(matrixOption)) {
-            matrixOption.setQuestion(null);
+    public void removeMatrixQuestion(MatrixQuestion matrixQuestion) {
+        if (matrixQuestions != null && matrixQuestions.remove(matrixQuestion)) {
+            matrixQuestion.setQuestion(null);
         }
     }
 
