@@ -26,8 +26,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+
 @Entity
 @Table(name = "question")
+// the createAt and updateAt fields will automatically be populated whenever an entity is created or updated
 @EntityListeners(AuditingEntityListener.class)
 public class Question implements Serializable {
 
@@ -38,17 +40,24 @@ public class Question implements Serializable {
 	@Column(name = "question_id")
 	private Long questionId;
 
+	// There is Many-to-One relationship between Site and Question. A site can have many questions.
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "site_id", referencedColumnName = "site_id")
 	private Site site;
 
+	// The question field is required and must be between 0 and 250 characters long.
 	@NotBlank
 	@Length(min = 0, max = 250)
 	private String question;
 
+	// Type of question. Example: trivia, poll, checkbox, matrix
+	private String type;
+
+	// There is One-to-Many relationship between Question and QuestionAnswer. A question can have many answers.
 	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
 	private List<QuestionAnswer> answers = new ArrayList<>();
 
+	// The createdAt and updatedAt fields will automatically be populated whenever an entity is created or updated
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
@@ -70,6 +79,15 @@ public class Question implements Serializable {
 	public Long getQuestionId() {
 		return questionId;
 	}
+
+	// Getter and setter for the type field
+	public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	public Date getCreatedAt() {
@@ -106,7 +124,7 @@ public class Question implements Serializable {
 				Objects.equals(updatedAt, question1.updatedAt);
 	}
 
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(questionId, site, question, answers, createdAt, updatedAt);
