@@ -38,8 +38,10 @@ public class QuestionAnswer implements Serializable {
 
 	private String answer;
 
-	@Column(nullable = false, columnDefinition = "TINYINT(1)")
+	// store either true or false
+	@Column(nullable = false)
 	private boolean isCorrectAnswer;
+
 
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
