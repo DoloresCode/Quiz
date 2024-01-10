@@ -53,6 +53,10 @@ public class Question implements Serializable {
 	// Type of question. Example: trivia, poll, checkbox, matrix
 	private String type;
 
+	// There is One-to-Many relationship between Question and MatrixOption. A question can have many matrix options.
+	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MatrixOption> matrixOptions = new ArrayList<>();
+
 	// There is One-to-Many relationship between Question and QuestionAnswer. A question can have many answers.
 	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
 	private List<QuestionAnswer> answers = new ArrayList<>();
@@ -110,6 +114,33 @@ public class Question implements Serializable {
 	public List<QuestionAnswer> getAnswers() {
 		return answers;
 	}
+
+	public List<MatrixOption> getMatrixOptions() {
+        if ("matrix".equals(this.type)) {
+            return matrixOptions;
+        } else {
+            return null;
+        }
+    }
+
+    public void setMatrixOptions(List<MatrixOption> matrixOptions) {
+        if ("matrix".equals(this.type)) {
+            this.matrixOptions = matrixOptions;
+        }
+    }
+
+    public void addMatrixOption(MatrixOption matrixOption) {
+        if ("matrix".equals(this.type) && matrixOptions != null) {
+            matrixOptions.add(matrixOption);
+            matrixOption.setQuestion(this);
+        }
+    }
+
+    public void removeMatrixOption(MatrixOption matrixOption) {
+        if (matrixOptions != null && matrixOptions.remove(matrixOption)) {
+            matrixOption.setQuestion(null);
+        }
+    }
 
 	@Override
 	public boolean equals(final Object o) {
