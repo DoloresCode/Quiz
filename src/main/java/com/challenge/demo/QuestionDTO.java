@@ -7,14 +7,20 @@ import java.util.List;
 public class QuestionDTO {
 
 	private Long questionId;
-
 	private Long siteId;
-
 	private String question;
-
+	private String type; // field for type of question
 	private Date createdAt;
-
 	private Date updatedAt;
+
+	// This are getter and setter for the type field.
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 	public static QuestionDTO build(Question question) {
 		final QuestionDTO obj = new QuestionDTO();

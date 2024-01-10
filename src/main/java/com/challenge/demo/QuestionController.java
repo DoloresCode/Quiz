@@ -36,6 +36,7 @@ public class QuestionController {
 				.findById(incomingQuestion.getSiteId())
 				.map(site -> {
 					final Question newQ = QuestionDTO.createQuestion(incomingQuestion, site);
+					newQ.setType(incomingQuestion.getType()); // when you create a question you need to handle the type of question too
 					return new ResponseEntity<>(QuestionDTO.build(questionRepository.save(newQ)), HttpStatus.CREATED);
 				})
 				.orElseGet(() -> ResponseEntity.notFound().build());
