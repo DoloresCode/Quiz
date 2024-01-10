@@ -50,6 +50,16 @@ public class QuestionController {
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
+	// Endpoint to get questions by type
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<QuestionDTO>> getQuestionsByType(@PathVariable String type) {
+        List<Question> questions = questionRepository.findByType(type);
+        if (questions.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(QuestionDTO.build(questions));
+    }
+
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<QuestionDTO> updateQuestion(@RequestBody Question incomingQuestion, @PathVariable(value = "id") Long questionId) {
@@ -86,7 +96,7 @@ public class QuestionController {
 	@PostMapping("/{id}/answers")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<QuestionAnswerDTO> createQuestionAnswers(@PathVariable(value = "id") Long questionId,
-																   @RequestBody QuestionAnswerDTO newQADto) {
+																@RequestBody QuestionAnswerDTO newQADto) {
 		return questionRepository
 				.findById(questionId)
 				.map(question -> {
