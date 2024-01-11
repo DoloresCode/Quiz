@@ -142,6 +142,19 @@ public class Question implements Serializable {
         }
     }
 
+	@throws IllegalStateException if no option is selected in any matrix question.
+    public void validateMatrixQuestionOptions() {
+        if ("matrix".equals(this.type) && (matrixQuestions == null || matrixQuestions.isEmpty())) {
+            throw new IllegalStateException("Matrix question must have at least one option selected.");
+        }
+
+		for (MatrixQuestion mq : matrixQuestions) {
+            if (mq.getRows().isEmpty() && mq.getColumns().isEmpty()) {
+                throw new IllegalStateException("Each matrix question must have at least one row or column option selected.");
+            }
+        }
+	}
+
 	@Override
 	public boolean equals(final Object o) {
 		if (this == o) return true;
