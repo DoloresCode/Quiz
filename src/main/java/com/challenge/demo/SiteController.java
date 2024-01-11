@@ -26,7 +26,7 @@ public class SiteController {
 	@Autowired
 	SiteRepository siteRepository;
 
-	// Handles POST requests to '/sites' with method createSite(@RequestBody Site createSite). It creates new Site object with random UUID and saves it to the database + returns the saved Site object.
+	// Handles POST requests to '/sites' with method createSite(@RequestBody Site createSite). It creates new Site object with random UUID and saves it to the database (as i dont have fake url)+ returns the saved Site object.
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
