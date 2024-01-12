@@ -1,6 +1,6 @@
 package com.challenge.demo.controllers;
 
-import com.challenge.demo.services.Site;
+import com.challenge.demo.entities.Site;
 import com.challenge.demo.services.SiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

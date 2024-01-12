@@ -1,5 +1,6 @@
 package com.challenge.demo.repositories;
 
+import com.challenge.demo.entities.Site;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
