@@ -1,8 +1,17 @@
 package com.challenge.demo.services;
 
+import com.challenge.demo.repositories.MatrixQuestionRepository;
+import com.challenge.demo.repositories.UserResponseRepository;
+import com.challenge.demo.entities.MatrixQuestion;
+import com.challenge.demo.entities.UserResponse;
+import com.challenge.demo.entities.User;
+import com.challenge.demo.repositories.MatrixQuestionRepository;
+import com.challenge.demo.repositories.UserRepository;
+import org.springframework.stereotype.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Objects;
-
+import java.util.UUID;
 
 @Service
 public class MatrixQuestionService {
@@ -43,5 +52,4 @@ public class MatrixQuestionService {
     public UserResponse captureResponse(UserResponse response) {
         return userResponseRepository.save(response);
     }
-
 }

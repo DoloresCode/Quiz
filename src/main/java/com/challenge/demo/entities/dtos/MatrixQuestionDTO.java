@@ -1,5 +1,6 @@
 package com.challenge.demo.entities.dtos;
 
+import com.challenge.demo.entities.MatrixQuestion;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

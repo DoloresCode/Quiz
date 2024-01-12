@@ -1,5 +1,8 @@
 package com.challenge.demo.entities.dtos;
 
+import com.challenge.demo.entities.Question; 
+import com.challenge.demo.entities.QuestionAnswer; 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

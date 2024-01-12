@@ -1,5 +1,12 @@
 package com.challenge.demo.controllers;
 
+
+import com.challenge.demo.services.MatrixQuestionService;
+import com.challenge.demo.services.UserService;
+import com.challenge.demo.entities.MatrixQuestion;
+import com.challenge.demo.entities.Question;
+import com.challenge.demo.entities.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,11 +43,8 @@ public class MatrixQuestionController {
     }
 
     @GetMapping("/{userUuid}/{siteUuid}")
-    public ResponseEntity<MatrixQuestion> getQuestionForUser(@PathVariable UUID userUuid, @PathVariable UUID siteUuid) {
-        User user = userService.findByUuid(userUuid);
-        if (user == null) {
-            user = userService.createUser(new User(userUuid));
-        }
+    public ResponseEntity<MatrixQuestion> getQuestionForUser(@PathVariable UUID userUuid) {
+        User user = userService.createUserWithUUID(userUuid);
         MatrixQuestion question = matrixQuestionService.getNextQuestionForUser(user);
         return new ResponseEntity<>(question, HttpStatus.OK);
     }

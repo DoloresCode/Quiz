@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/sites")
 public class SiteController {
 
-	@usages
+	@Autowired
 	private final SiteService siteService;
 
 	@Autowired
@@ -43,7 +43,7 @@ public class SiteController {
 	@GetMapping()
 	public ResponseEntity<List<Site>> getSites() {
 		return Optional
-				.ofNullable(siteService.findAll())
+				.ofNullable(siteService.getAllSites())
 				.map(sites -> ResponseEntity.ok(sites))
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}

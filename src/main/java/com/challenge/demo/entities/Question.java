@@ -1,6 +1,9 @@
 package com.challenge.demo.entities;
 
+import com.challenge.demo.entities.Question;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.CascadeType;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
