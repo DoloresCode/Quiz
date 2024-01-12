@@ -49,7 +49,7 @@ public class MatrixQuestionDTO {
     public static MatrixQuestionDTO fromEntity(MatrixQuestion matrixQuestion) {
         MatrixQuestionDTO dto = new MatrixQuestionDTO();
         dto.setId(matrixQuestion.getId());
-        dto.setQuestionId(matrixQuestion.getQuestionId());
+        dto.setId(matrixQuestion.getId());
         dto.setRows(new ArrayList<>(matrixQuestion.getRows()));
         dto.setColumns(new ArrayList<>(matrixQuestion.getColumns()));
         return dto;
@@ -58,7 +58,7 @@ public class MatrixQuestionDTO {
     public static MatrixQuestion toEntity(MatrixQuestionDTO matrixQuestionDTO) {
         MatrixQuestion question = new MatrixQuestion();
         question.setId(matrixQuestionDTO.getId());
-        question.setQuestionId(matrixQuestionDTO.getQuestionId());
+        question.setId(matrixQuestionDTO.getId());
         question.setRows(new ArrayList<>(matrixQuestionDTO.getRows()));
         question.setColumns(new ArrayList<>(matrixQuestionDTO.getColumns()));
         return question;

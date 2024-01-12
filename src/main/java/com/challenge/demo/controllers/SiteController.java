@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-// import java.util.UUID;
 
 
 @RestController
@@ -36,7 +35,7 @@ public class SiteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
 	public Site createSite(@RequestBody Site createSite) {
-		return siteService.createSite(createSite);
+		return siteService.save(createSite);
 	}
 
 	// Handles GET requests to '/sites' with method getSites(). It retives all Site objects from the database and returns them + if no Site object is found, it returns 404.
@@ -48,13 +47,13 @@ public class SiteController {
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-	// Handles PUT requests to '/sites/{id}' with method updateSite(@RequestBody Site updatedSite, @PathVariable(value = "id") Long siteId). It udates the Site object with the given id and returns the updated Site object.
+	// Handles PUT requests to '/sites/{id}' with method updateSite(@RequestBody Site updatedSite, @PathVariable(value = "id") Long id). It udates the Site object with the given id and returns the updated Site object.
 	// If no Site object is found, it returns 404.
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Site> updateSite(@RequestBody Site updatedSite, @PathVariable(value = "id") Long siteId) {
+	public ResponseEntity<Site> updateSite(@RequestBody Site updatedSite, @PathVariable(value = "id") Long id) {
 		return siteService
-				.findById(siteId)
+				.findById(id)
 				.map(site -> {
 					site.setUrl(updatedSite.getUrl());
 					return new ResponseEntity<>(siteService.save(site), HttpStatus.OK);
@@ -62,12 +61,12 @@ public class SiteController {
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-	// Handles Delete requests to '/sites/{id}' with method deleteSite(@PathVariable(value = "id") Long siteId). Deletes the Site object with the given id and returns the deleted Site object
+	// Handles Delete requests to '/sites/{id}' with method deleteSite(@PathVariable(value = "id") Long id). Deletes the Site object with the given id and returns the deleted Site object
 	// If no Site object is found, it returns 404.
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Site> deleteSite(@PathVariable(value = "id") Long siteId) {
+	public ResponseEntity<Site> deleteSite(@PathVariable(value = "id") Long id) {
 		return siteService
-				.findById(siteId)
+				.findById(id)
 				.map(site -> {
 					siteService.delete(site);
 					return ResponseEntity.ok(site);
@@ -75,12 +74,12 @@ public class SiteController {
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-	// Handles GET requests to 	'/sites/{id}' with method getSiteById(@PathVariable(value = "id") Long siteId). Retrieves the Site object with the given id and returns it.
+	// Handles GET requests to 	'/sites/{id}' with method getSiteById(@PathVariable(value = "id") Long id). Retrieves the Site object with the given id and returns it.
 	// If no Site object is found, it returns 404.
 	@GetMapping("/{id}")
-	public ResponseEntity<Site> getSiteById(@PathVariable(value = "id") Long siteId) {
+	public ResponseEntity<Site> getSiteById(@PathVariable(value = "id") Long id) {
 		return siteService
-				.findById(siteId)
+				.findById(id)
 				.map(site -> ResponseEntity.ok(site))
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}

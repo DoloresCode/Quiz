@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class MatrixQuestionService {
@@ -39,17 +40,21 @@ public class MatrixQuestionService {
             userRepository.save(user);
         }
 
-        MatrixQuestion question = matrixQuestionRepository.findUniqueQuestionForUser(user);
-        if (question == null) {
+        Optional<MatrixQuestion> question = matrixQuestionRepository.findUniqueQuestionForUser(user);
+        if (question.isEmpty()) {
             // Resets the list of questions the user has seen and get a new question
             userResponseRepository.deleteByUser(user);
             question = matrixQuestionRepository.findUniqueQuestionForUser(user);
         }
-        return question;
+        return question.get();
     }
 
     // Method to capture a user's response to a question
     public UserResponse captureResponse(UserResponse response) {
         return userResponseRepository.save(response);
+    }
+
+    public MatrixQuestion getNextQuestionForUser(User user) {
+        return new MatrixQuestion();
     }
 }

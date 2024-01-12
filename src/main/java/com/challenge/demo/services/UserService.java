@@ -25,7 +25,7 @@ public class UserService {
         // If user does not exist, create a new one
         User newUser = new User();
         newUser.setUuid(uuid); // Set the UUID of the new user
-        return userRepository.save(User);
+        return userRepository.save(newUser);
     }
 
     // Update an existing user

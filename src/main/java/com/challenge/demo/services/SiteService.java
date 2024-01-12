@@ -20,13 +20,13 @@ public class SiteService {
     }
 
     // Create a new Site
-    public Site createSite(Site site) {
+    public Site save(Site site) {
         site.setSiteUUID(UUID.randomUUID());
         return siteRepository.save(site);
     }
 
     // Get Site by ID
-    public Optional<Site> getSiteById(Long id) {
+    public Optional<Site> findById(Long id) {
         return siteRepository.findById(id);
     }
 
@@ -41,7 +41,7 @@ public class SiteService {
     }
 
     // Delete Site
-    public void deleteSite(Site site) {
+    public void delete(Site site) {
         siteRepository.delete(site);
     }
 }
