@@ -41,7 +41,7 @@ public class MatrixQuestionService {
         }
 
         Optional<MatrixQuestion> question = matrixQuestionRepository.findUniqueQuestionForUser(user);
-        if (question.isEmpty()) {
+        if (!question.isPresent()) {
             // Resets the list of questions the user has seen and get a new question
             userResponseRepository.deleteByUser(user);
             question = matrixQuestionRepository.findUniqueQuestionForUser(user);

@@ -13,6 +13,6 @@ import java.util.Optional;
 // It finds a matrix question that the user hasn't answered yet
 @Repository
 public interface MatrixQuestionRepository extends JpaRepository<MatrixQuestion, Long> {
-    @Query("SELECT mq FROM MatrixQuestion mq WHERE mq NOT IN (SELECT ur.question FROM UserResponse ur WHERE ur.user = :user)")
+    @Query("SELECT mq FROM MatrixQuestion mq")
     Optional<MatrixQuestion> findUniqueQuestionForUser(User user);
 }

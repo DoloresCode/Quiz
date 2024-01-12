@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -22,6 +23,9 @@ public class DemoApplication {
 
 	@GetMapping("/")
     public List<String> home() {
-        return List.of("Hello", "World");
+		List<String> list = new ArrayList();
+		list.add("Hello");
+		list.add("World");
+        return list;
     }
 }
