@@ -1,4 +1,4 @@
-package com.challenge.demo;
+package com.challenge.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
@@ -142,7 +142,7 @@ public class Question implements Serializable {
         }
     }
 
-	@throws IllegalStateException if no option is selected in any matrix question.
+	// throws IllegalStateException if no option is selected in any matrix question.
     public void validateMatrixQuestionOptions() {
         if ("matrix".equals(this.type) && (matrixQuestions == null || matrixQuestions.isEmpty())) {
             throw new IllegalStateException("Matrix question must have at least one option selected.");

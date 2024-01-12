@@ -1,4 +1,4 @@
-package com.challenge.demo;
+package com.challenge.demo.entities.dtos;
 
 import java.util.ArrayList;
 import java.util.Date;

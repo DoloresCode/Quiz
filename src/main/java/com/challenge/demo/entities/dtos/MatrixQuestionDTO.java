@@ -1,4 +1,4 @@
-package com.challenge.demo;
+package com.challenge.demo.entities.dtos;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +11,39 @@ public class MatrixQuestionDTO {
     private List<String> rows;
     private List<String> columns;
 
-    // Constructors, getters, and setters
+    // Getters
+    public Long getId() {
+        return id;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public List<String> getRows() {
+        return rows;
+    }
+
+    public List<String> getColumns() {
+        return columns;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public void setRows(List<String> rows) {
+        this.rows = rows;
+    }
+
+    public void setColumns(List<String> columns) {
+        this.columns = columns;
+    }
 
     public static MatrixQuestionDTO fromEntity(MatrixQuestion matrixQuestion) {
         MatrixQuestionDTO dto = new MatrixQuestionDTO();

@@ -1,4 +1,4 @@
-package com.challenge.demo;
+package com.challenge.demo.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

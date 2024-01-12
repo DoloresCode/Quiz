@@ -1,3 +1,5 @@
+package com.challenge.demo.repositories;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // It retrieves the User entity by its UUID.
