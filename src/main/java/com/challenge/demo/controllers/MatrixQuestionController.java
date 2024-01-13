@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -36,32 +37,85 @@ public class MatrixQuestionController {
     @Autowired
     private UserService userService;
 
-
     @PostMapping
     public ResponseEntity<MatrixQuestion> createOrUpdateMatrixQuestion(@RequestBody MatrixQuestion matrixQuestion) {
         MatrixQuestion savedMatrixQuestion = matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
         return new ResponseEntity<>(savedMatrixQuestion, HttpStatus.CREATED);
     }
 
-    //Create a POST Mapping method to handle Row creation. Use URL like /matrix-questions/{matrixQuestionID}/rows 
+    // Create a new row for MatrixQuestion with a POST mapping method to /matrix-questions
+    // Use URL like /matrix-questions/{matrixQuestionID}/rows - "http://localhost:8080/matrix-questions/1"
+    @PostMapping("/{matrixQuestionID}/rows")
+    public ResponseEntity<MatrixQuestion> createRow(@PathVariable Long matrixQuestionID, @RequestBody String row) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionID);
+        matrixQuestion.getRows().add(row);
+        MatrixQuestion updatedMatrixQuestion = matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
+        return new ResponseEntity<>(updatedMatrixQuestion, HttpStatus.CREATED);
+    }
 
-    //Create a POST Mapping method to handle Columns creation. Use URL like /matrix-questions/{matrixQuestionID}/columns
+    // Create a new column for MatrixQuestion with a POST mapping method to /matrix-questions
+    // Use URL like /matrix-questions/{matrixQuestionID}/columns - "http://localhost:8080/matrix-questions/1"
+    @PostMapping("/{matrixQuestionID}/columns")
+    public ResponseEntity<MatrixQuestion> createColumn(@PathVariable Long matrixQuestionID, @RequestBody String column) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionID);
+        matrixQuestion.getColumns().add(column);
+        MatrixQuestion updatedMatrixQuestion = matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
+        return new ResponseEntity<>(updatedMatrixQuestion, HttpStatus.CREATED);
+    }
 
-    //Create a GET Mapping method to handle Row creation.  Use URL like /matrix-questions/{matrixQuestionID}/rows
+    // Use URL like /matrix_questions/{id}/rows - "http://localhost:8080/matrix-questions/1"
+    @GetMapping("/{id}/rows")
+    public ResponseEntity<List<String>> getMatrixQuestionRows(@PathVariable(value = "id") Long matrixQuestionId) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionId);
+        return new ResponseEntity<>(matrixQuestion.getRows(), HttpStatus.OK);
+    }
 
-    //Create a GET Mapping method to handle Columns creation. Use URL like /matrix-questions/{matrixQuestionID}/rows
-    
-    //Create the PUT Mapping method to handle Row update. Use URL like /matrix-questions/{matrixQuestionID}/rows/{rowID}
+    // Use URL like /matrix_questions/{id}/columns - "http://localhost:8080/matrix-questions/1"
+    @GetMapping("/{id}/columns")
+    public ResponseEntity<List<String>> getMatrixQuestionColumns(@PathVariable(value = "id") Long matrixQuestionId) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionId);
+        return new ResponseEntity<>(matrixQuestion.getColumns(), HttpStatus.OK);
+    }
 
-    //Create the PUT Mapping method to handle Column update. Use URL like /matrix-questions/{matrixQuestionID}/columns/{columnID}
-    
-    // Create the Delete method to handle Row deletion. Use URL like /matrix-questions/{matrixQuestionID}/rows/{rowID}
+    // update the specified row for the specified matrix question
+    // Use URL like /matrix-questions/{matrixQuestionID}/rows/{rowIndex} - "http://localhost:8080/matrix-questions/1/rows/0"
+    @PutMapping("/{matrixQuestionID}/rows/{rowIndex}")
+    public ResponseEntity<MatrixQuestion> updateRow(@PathVariable Long matrixQuestionID, @PathVariable int rowIndex, @RequestBody String updatedRow) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionID);
+        matrixQuestion.getRows().set(rowIndex, updatedRow);
+        MatrixQuestion updatedMatrixQuestion = matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
+        return new ResponseEntity<>(updatedMatrixQuestion, HttpStatus.OK);
+    }
 
-    // Create the Delete method to handle Column deletion. Use URL like /matrix-questions/{matrixQuestionID}/columns/{columnID}
+    // update the specified column for the specified matrix question
+    // Use URL like /matrix-questions/{matrixQuestionID}/columns/{columnIndex} -  "http://localhost:8080/matrix-questions/1/columns/0"
+    @PutMapping("/{matrixQuestionID}/columns/{columnIndex}")
+    public ResponseEntity<MatrixQuestion> updateColumn(@PathVariable Long matrixQuestionID, @PathVariable int columnIndex, @RequestBody String updatedColumn) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionID);
+        matrixQuestion.getColumns().set(columnIndex, updatedColumn);
+        MatrixQuestion updatedMatrixQuestion = matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
+        return new ResponseEntity<>(updatedMatrixQuestion, HttpStatus.OK);
+    }
 
-    // After test with Postman and see that everything is created in the database H2
+    // delete the specified row for the specified matrix question
+    // Use URL like /matrix-questions/{matrixQuestionID}/rows/{rowIndex}
+    @DeleteMapping("/{matrixQuestionID}/rows/{rowIndex}")
+    public ResponseEntity<Void> deleteRow(@PathVariable Long matrixQuestionID, @PathVariable int rowIndex) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionID);
+        matrixQuestion.getRows().remove(rowIndex);
+        matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
-    // Create the README.md file and add the instructions to run the project
+    // delete the specified column for the specified matrix question
+    // Use URL like /matrix-questions/{matrixQuestionID}/columns/{columnIndex}
+    @DeleteMapping("/{matrixQuestionID}/columns/{columnIndex}")
+    public ResponseEntity<Void> deleteColumn(@PathVariable Long matrixQuestionID, @PathVariable int columnIndex) {
+        MatrixQuestion matrixQuestion = matrixQuestionService.getMatrixQuestionById(matrixQuestionID);
+        matrixQuestion.getColumns().remove(columnIndex);
+        matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     @GetMapping("/{userUuid}/{siteUuid}")
     public ResponseEntity<MatrixQuestion> getQuestionForUser(@PathVariable UUID userUuid,@PathVariable UUID siteUuid) {

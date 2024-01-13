@@ -5,11 +5,11 @@ import com.challenge.demo.repositories.UserResponseRepository;
 import com.challenge.demo.entities.MatrixQuestion;
 import com.challenge.demo.entities.UserResponse;
 import com.challenge.demo.entities.User;
-import com.challenge.demo.repositories.MatrixQuestionRepository;
 import com.challenge.demo.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.Optional;
@@ -56,5 +56,11 @@ public class MatrixQuestionService {
 
     public MatrixQuestion getNextQuestionForUser(User user) {
         return new MatrixQuestion();
+    }
+
+    // Method to get a MatrixQuestion by its ID from the MatrixQuestionRepository. If the MatrixQuestion does not exist, it throws a NoSuchElementException is thrown with a message indicating the ID of the MatrixQuestion that could not be found.
+    public MatrixQuestion getMatrixQuestionById(Long id) {
+        return matrixQuestionRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("MatrixQuestion not found with id : " + id));
     }
 }
