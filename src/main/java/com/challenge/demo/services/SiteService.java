@@ -30,6 +30,11 @@ public class SiteService {
         return siteRepository.findById(id);
     }
 
+    // Get Site by Uuid
+    public Site findByUuid(UUID uuid) {
+        return siteRepository.findByUuid(uuid);
+    }
+
     // Get all Sites
     public List<Site> getAllSites() {
         return siteRepository.findAll();

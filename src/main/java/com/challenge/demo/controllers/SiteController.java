@@ -23,13 +23,6 @@ public class SiteController {
 		this.siteService = siteService;
 	}
 
-	// @Autowired
-	// SiteRepository siteRepository;
-
-	// @Autowired
-	// SiteService siteService;
-
-
 	// Handles POST requests to '/sites' with method createSite(@RequestBody Site createSite). It creates new Site object with random UUID and saves it to the database (as i dont have fake url)+ returns the saved Site object.
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
@@ -38,12 +31,12 @@ public class SiteController {
 		return siteService.save(createSite);
 	}
 
-	// Handles GET requests to '/sites' with method getSites(). It retives all Site objects from the database and returns them + if no Site object is found, it returns 404.
+	// Handles GET requests to '/sites' with method getSites(). It relives all Site objects from the database and returns them + if no Site object is found, it returns 404.
 	@GetMapping()
 	public ResponseEntity<List<Site>> getSites() {
 		return Optional
 				.ofNullable(siteService.getAllSites())
-				.map(sites -> ResponseEntity.ok(sites))
+				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
@@ -80,7 +73,7 @@ public class SiteController {
 	public ResponseEntity<Site> getSiteById(@PathVariable(value = "id") Long id) {
 		return siteService
 				.findById(id)
-				.map(site -> ResponseEntity.ok(site))
+				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 }
