@@ -1,0 +1,526 @@
+{
+	"info": {
+		"_postman_id": "8b39f274-924e-40dd-9650-17b9de1b07f8",
+		"name": "DemoQuestions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Sites",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/sites",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Site",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\":\"demo.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/sites",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Normal Questions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/questions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Normal Questions Answers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/questions/2/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions",
+						"2",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Matrix Questions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Matrix Questions Answers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions/2/answers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions",
+						"2",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Matrix Questions Rows",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions/2/rows",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions",
+						"2",
+						"rows"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Matrix Questions Columns",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions/2/columns",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions",
+						"2",
+						"columns"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Next Question",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/next-question/22",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"next-question",
+						"22"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Normal Questions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"siteId\": 1,\n    \"question\": \"how many toes does a pig have?\",\n    \"type\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/questions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Matrix Questions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"siteId\": 1,\n    \"matrixQuestion\": \"Please tell us a bit about yourself?\",\n    \"rowHeader\": \"Age\",\n    \"columnHeader\": \"Gender\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Normal Answers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"answer\": \"4 toes\",\n    \"isCorrectAnswer\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/questions/2/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions",
+						"2",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Matrix Answers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions/2/answers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions",
+						"2",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Matrix Questions Rows",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"row\" : \"< 18\",\n    \"index\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions/2/rows",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions",
+						"2",
+						"rows"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Matrix Questions Columns",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"column\" : \"Male\",\n    \"index\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/matrix-questions/2/columns",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matrix-questions",
+						"2",
+						"columns"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/sites/1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sites",
+						"1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Answer a Given Question",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : 22,\n    \"questionId\" : 2,\n    \"matrixQuestionId\" : 0,\n    \"questionAnswerId\" : 3,\n    \"matrixQuestionRowId\" : 0,\n    \"matrixQuestionColumnId\" : 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/answer-question",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"answer-question"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

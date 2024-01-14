@@ -21,11 +21,4 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@GetMapping("/")
-    public List<String> home() {
-		List<String> list = new ArrayList();
-		list.add("Hello");
-		list.add("World");
-        return list;
-    }
 }

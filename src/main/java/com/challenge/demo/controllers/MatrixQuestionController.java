@@ -37,11 +37,12 @@ public class MatrixQuestionController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<MatrixQuestion> createOrUpdateMatrixQuestion(@RequestBody MatrixQuestion matrixQuestion) {
+    @PostMapping("/{userUuid}/{siteUuid}")
+    public ResponseEntity<MatrixQuestion> createOrUpdateMatrixQuestion(@PathVariable UUID userUuid,@PathVariable UUID siteUuid,@RequestBody MatrixQuestion matrixQuestion) {
         MatrixQuestion savedMatrixQuestion = matrixQuestionService.saveOrUpdateMatrixQuestion(matrixQuestion);
         return new ResponseEntity<>(savedMatrixQuestion, HttpStatus.CREATED);
     }
+
 
     // Create a new row for MatrixQuestion with a POST mapping method to /matrix-questions
     // Use URL like /matrix-questions/{matrixQuestionID}/rows - "http://localhost:8080/matrix-questions/1"
@@ -117,6 +118,7 @@ public class MatrixQuestionController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    // Use URL like /matrix-questions/{id} - "http://localhost:8080/matrix-questions//123e4567-e89b-12d3-a456-426614174000/123e4567-e89b-12d3-a456-426614174000"
     @GetMapping("/{userUuid}/{siteUuid}")
     public ResponseEntity<MatrixQuestion> getQuestionForUser(@PathVariable UUID userUuid,@PathVariable UUID siteUuid) {
         User user = userService.createUserWithUUID(userUuid);
