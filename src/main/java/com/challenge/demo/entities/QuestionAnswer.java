@@ -1,5 +1,6 @@
 package com.challenge.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -34,6 +35,7 @@ public class QuestionAnswer implements Serializable {
 
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id", referencedColumnName = "question_id")
+	@JsonBackReference(value="answers")
 	private Question question;
 
 	private String answer;

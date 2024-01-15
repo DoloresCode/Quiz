@@ -2,8 +2,8 @@ package com.challenge.demo.entities;
 
 import com.challenge.demo.entities.Question;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.CascadeType;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -26,8 +26,10 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -56,13 +58,14 @@ public class Question implements Serializable {
 	// Type of question. Example: trivia, poll, checkbox, matrix
 	private String type;
 
-	// There is One-to-Many relationship between Question and MatrixQuestion. A question can have many matrix options.
-	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MatrixQuestion> matrixQuestions = new ArrayList<>();
-
 	// There is One-to-Many relationship between Question and QuestionAnswer. A question can have many answers.
 	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+	@JsonManagedReference(value="answers")
 	private List<QuestionAnswer> answers = new ArrayList<>();
+
+	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+	@JsonManagedReference(value="userResponses")
+	private Set<UserResponse> userResponses = new HashSet<>();
 
 	// The createdAt and updatedAt fields will automatically be populated whenever an entity is created or updated
 	@Column(nullable = false, updatable = false)
@@ -118,44 +121,28 @@ public class Question implements Serializable {
 		return answers;
 	}
 
-	public List<MatrixQuestion> getMatrixQuestions() {
-        if ("matrix".equals(this.type)) {
-            return matrixQuestions;
-        } else {
-            return null;
-        }
-    }
+	public void setQuestionId(Long questionId) {
+		this.questionId = questionId;
+	}
 
-    public void setMatrixQuestions(List<MatrixQuestion> matrixQuestions) {
-        if ("matrix".equals(this.type)) {
-            this.matrixQuestions = matrixQuestions;
-        }
-    }
+	public void setAnswers(List<QuestionAnswer> answers) {
+		this.answers = answers;
+	}
 
-    public void addMatrixQuestion(MatrixQuestion matrixQuestion) {
-        if ("matrix".equals(this.type) && matrixQuestions != null) {
-            matrixQuestions.add(matrixQuestion);
-            matrixQuestion.setQuestion(this);
-        }
-    }
+	public Set<UserResponse> getUserResponses() {
+		return userResponses;
+	}
 
-    public void removeMatrixQuestion(MatrixQuestion matrixQuestion) {
-        if (matrixQuestions != null && matrixQuestions.remove(matrixQuestion)) {
-            matrixQuestion.setQuestion(null);
-        }
-    }
+	public void setUserResponses(Set<UserResponse> userResponses) {
+		this.userResponses = userResponses;
+	}
 
-	// throws IllegalStateException if no option is selected in any matrix question.
-    public void validateMatrixQuestionOptions() {
-        if ("matrix".equals(this.type) && (matrixQuestions == null || matrixQuestions.isEmpty())) {
-            throw new IllegalStateException("Matrix question must have at least one option selected.");
-        }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-		for (MatrixQuestion mq : matrixQuestions) {
-            if (mq.getRows().isEmpty() && mq.getColumns().isEmpty()) {
-                throw new IllegalStateException("Each matrix question must have at least one row or column option selected.");
-            }
-        }
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	@Override

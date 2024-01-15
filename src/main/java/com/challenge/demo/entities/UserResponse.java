@@ -1,8 +1,6 @@
 package com.challenge.demo.entities;
 
-import com.challenge.demo.entities.User;
-import com.challenge.demo.entities.MatrixQuestion;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +18,20 @@ public class UserResponse {
     private User user;
 
     @ManyToOne
+    @JsonBackReference(value="userResponses")
+    private Question question;
+
+    @ManyToOne
+    @JsonBackReference(value="userResponsesMatrix")
     private MatrixQuestion matrixQuestion;
 
-    private String response;
+    @ManyToOne
+    private QuestionAnswer questionAnswer;
+
+    @ManyToOne
+    private MatrixQuestionRow matrixQuestionRow;
+    @ManyToOne
+    private MatrixQuestionColumn matrixQuestionColumn;
 
     // Getters and Setters
 
@@ -42,6 +51,22 @@ public class UserResponse {
         this.user = user;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public QuestionAnswer getQuestionAnswer() {
+        return questionAnswer;
+    }
+
+    public void setQuestionAnswer(QuestionAnswer questionAnswer) {
+        this.questionAnswer = questionAnswer;
+    }
+
     public MatrixQuestion getMatrixQuestion() {
         return matrixQuestion;
     }
@@ -50,11 +75,19 @@ public class UserResponse {
         this.matrixQuestion = matrixQuestion;
     }
 
-    public String getResponse() {
-        return response;
+    public MatrixQuestionRow getMatrixQuestionRow() {
+        return matrixQuestionRow;
     }
 
-    public void setResponse(String response) {
-        this.response = response;
+    public void setMatrixQuestionRow(MatrixQuestionRow matrixQuestionRow) {
+        this.matrixQuestionRow = matrixQuestionRow;
+    }
+
+    public MatrixQuestionColumn getMatrixQuestionColumn() {
+        return matrixQuestionColumn;
+    }
+
+    public void setMatrixQuestionColumn(MatrixQuestionColumn matrixQuestionColumn) {
+        this.matrixQuestionColumn = matrixQuestionColumn;
     }
 }

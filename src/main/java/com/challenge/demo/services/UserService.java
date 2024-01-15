@@ -25,7 +25,7 @@ public class UserService {
     @Autowired
     MatrixQuestionRepository matrixQuestionRepository;
 
-    // Create a new user with a given UUID we included the Site parameter too
+    // Create a new user with a given UUID
     public User createUserWithUUID(UUID uuid, Site site) {
         // Check if user with the given UUID already exists
         User existingUser = userRepository.findByUuid(uuid);
@@ -74,7 +74,7 @@ public class UserService {
         return Optional.of(NextQuestionDTO.fromQuestion(nextQuestion));
     }
 
-     // Method to find next Matrix question for a user using their ID
+    // Method to find next Matrix question for a user using their ID
     private Optional<NextQuestionDTO> findNextMatrixQuestion(Long userId) {
         List<MatrixQuestion> questions = matrixQuestionRepository.findNextQuestion(userId);
         if(questions==null || questions.isEmpty()){

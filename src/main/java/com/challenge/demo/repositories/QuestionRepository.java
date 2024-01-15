@@ -14,4 +14,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
 	// Method to find questions by their type
     List<Question> findByType(String type);
+
+	@Query(value = "SELECT q from Question q where not exists (select ur from UserResponse ur where ur.question.id=q.id and ur.user.id=:userId)")
+    List<Question> findNextQuestion(Long userId);
 }

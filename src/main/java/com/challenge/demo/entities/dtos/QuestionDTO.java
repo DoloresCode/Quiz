@@ -1,6 +1,7 @@
 package com.challenge.demo.entities.dtos;
 
-import com.challenge.demo.entities.Question; 
+import com.challenge.demo.entities.Question;
+import com.challenge.demo.entities.QuestionAnswer;
 import com.challenge.demo.entities.Site;
 
 import java.util.ArrayList;
@@ -13,8 +14,7 @@ public class QuestionDTO {
 	private Long siteId;
 	private String question;
 	private String type; // field for type of question
-	private Date createdAt;
-	private Date updatedAt;
+	private List<QuestionAnswer> answers = new ArrayList<>();
 
 	// This are getter and setter for the type field.
     public String getType() {
@@ -30,9 +30,8 @@ public class QuestionDTO {
 		obj.setSiteId(question.getSite().getSiteId());
 		obj.setQuestionId(question.getQuestionId());
 		obj.setQuestion(question.getQuestion());
-		obj.setUpdatedAt(question.getUpdatedAt());
-		obj.setCreatedAt(question.getCreatedAt());
-
+		obj.setType(question.getType());
+		obj.setAnswers(question.getAnswers());
 		return obj;
 	}
 
@@ -46,12 +45,15 @@ public class QuestionDTO {
 		return ret;
 	}
 
+	// Create a new Question entity from the QuestionDTO and Site objects
 	public static Question createQuestion(final QuestionDTO incomingQuestion, final Site site) {
-		final Question newQ = new Question();
-		newQ.setSite(site);
-		newQ.setQuestion(incomingQuestion.getQuestion());
-
-		return newQ;
+		final Question newQuestion = new Question();
+		newQuestion.setSite(site);
+		newQuestion.setQuestion(incomingQuestion.getQuestion());
+		newQuestion.setType(incomingQuestion.getType());
+		newQuestion.setCreatedAt(new Date());
+		newQuestion.setUpdatedAt(new Date());
+		return newQuestion;
 	}
 
 	public Long getSiteId() {
@@ -70,27 +72,19 @@ public class QuestionDTO {
 		this.question = question;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public List<QuestionAnswer> getAnswers() {
+		return answers;
 	}
 
-	public void setCreatedAt(final Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(final Date updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setAnswers(List<QuestionAnswer> answers) {
+		this.answers = answers;
 	}
 
 	public Long getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(final Long questionId) {
+	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
 	}
 }
